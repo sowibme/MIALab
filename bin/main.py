@@ -25,7 +25,7 @@ import mialab.utilities.pipeline_utilities as putil
 
 FLAGS = None  # the program flags
 IMAGE_KEYS = [structure.BrainImageTypes.T1, structure.BrainImageTypes.T2, structure.BrainImageTypes.GroundTruth]  # the list of images we will load
-TRAIN_BATCH_SIZE = 70  # 1..70, the higher the faster but more memory usage
+TRAIN_BATCH_SIZE = 4  # 1..70, the higher the faster but more memory usage
 TEST_BATCH_SIZE = 2  # 1..30, the higher the faster but more memory usage
 
 

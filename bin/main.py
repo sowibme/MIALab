@@ -138,17 +138,17 @@ def main(_):
             images_probabilities.append(image_probabilities)
 
         # post-process segmentation and evaluate with post-processing
-        post_process_params = {'crf_post': True}
-        images_post_processed = putil.post_process_batch(images_test, images_prediction, images_probabilities,
-                                                         post_process_params, multi_process=True)
+        #post_process_params = {'crf_post': True}
+        #images_post_processed = putil.post_process_batch(images_test, images_prediction, images_probabilities,
+        #                                                 post_process_params, multi_process=True)
 
         for i, img in enumerate(images_test):
-            evaluator.evaluate(images_post_processed[i], img.images[structure.BrainImageTypes.GroundTruth],
-                               img.id_ + '-PP')
+            #evaluator.evaluate(images_post_processed[i], img.images[structure.BrainImageTypes.GroundTruth],
+            #                   img.id_ + '-PP')
 
             # save results
             sitk.WriteImage(images_prediction[i], os.path.join(result_dir, images_test[i].id_ + '_SEG.mha'), True)
-            sitk.WriteImage(images_post_processed[i], os.path.join(result_dir, images_test[i].id_ + '_SEG-PP.mha'), True)
+            #sitk.WriteImage(images_post_processed[i], os.path.join(result_dir, images_test[i].id_ + '_SEG-PP.mha'), True)
 
 
 if __name__ == "__main__":

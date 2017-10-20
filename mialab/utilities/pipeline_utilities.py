@@ -179,6 +179,7 @@ def pre_process(id_: str, paths: dict, **kwargs) -> structure.BrainImage:
     img = {img_key: sitk.ReadImage(path) for img_key, path in paths.items()}
     img = structure.BrainImage(id_, path, img)
 
+    """
     # construct T1 pipeline
     pipeline_t1 = fltr.FilterPipeline()
     if kwargs.get('zscore_pre', False):
@@ -186,7 +187,8 @@ def pre_process(id_: str, paths: dict, **kwargs) -> structure.BrainImage:
     if kwargs.get('registration_pre', False):
         pipeline_t1.add_filter(fltr_reg.MultiModalRegistration())
         pipeline_t1.set_param(fltr_reg.MultiModalRegistrationParams(atlas_t1), 1)
-
+    
+    
     # execute pipeline on T1 image
     img.images[structure.BrainImageTypes.T1] = pipeline_t1.execute(img.images[structure.BrainImageTypes.T1])
 
@@ -197,6 +199,8 @@ def pre_process(id_: str, paths: dict, **kwargs) -> structure.BrainImage:
 
     # execute pipeline on T2 image
     img.images[structure.BrainImageTypes.T2] = pipeline_t2.execute(img.images[structure.BrainImageTypes.T2])
+    
+    """
 
     if kwargs.get('registration_pre', False):
         # get transformation

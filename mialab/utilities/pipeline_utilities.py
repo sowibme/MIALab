@@ -179,7 +179,11 @@ def pre_process(id_: str, paths: dict, **kwargs) -> structure.BrainImage:
     img = {img_key: sitk.ReadImage(path) for img_key, path in paths.items()}
     img = structure.BrainImage(id_, path, img)
 
+
     """
+        Pre_Processing Task Add parts to Pipeline_t1 and t2
+    """
+
     # construct T1 pipeline
     pipeline_t1 = fltr.FilterPipeline()
     if kwargs.get('zscore_pre', False):
@@ -200,7 +204,6 @@ def pre_process(id_: str, paths: dict, **kwargs) -> structure.BrainImage:
     # execute pipeline on T2 image
     img.images[structure.BrainImageTypes.T2] = pipeline_t2.execute(img.images[structure.BrainImageTypes.T2])
     
-    """
 
     if kwargs.get('registration_pre', False):
         # get transformation

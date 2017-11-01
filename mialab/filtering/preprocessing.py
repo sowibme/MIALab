@@ -177,6 +177,32 @@ class NormalizeZScore(fltr.IFilter):
             .format(self=self)
 
 
+class Median(fltr.IFilter):
+    """Represents a median filter."""
+
+    def __init__(self,
+                 radius: int=1):
+        """Initializes a new instance of the Median class."""
+        super().__init__()
+        self.radius = radius
+
+    def execute(self, image: sitk.Image, params: fltr.IFilterParams=None) -> sitk.Image:
+
+        median = sitk.MedianImageFilter()
+        median.SetRadius(self.radius)
+
+        return median.Execute(image)
+
+    def __str__(self):
+        """Gets a printable string representation.
+
+        Returns:
+            str: String representation.
+        """
+        return 'Median:\n' \
+            .format(self=self)
+
+
 class RescaleIntensity(fltr.IFilter):
     """Represents a rescale intensity filter."""
 

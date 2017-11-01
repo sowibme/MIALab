@@ -61,8 +61,8 @@ def main(_):
                                          futil.BrainImageFilePathGenerator(),
                                          futil.DataDirectoryFilter())
     data_items = list(crawler.data.items())
-
-    pre_process_params = {'zscore_pre': False,
+    pre_process_params = {'median_pre': True,
+                          'zscore_pre': False,
                           'coordinates_feature': True,
                           'intensity_feature': True,
                           'gradient_intensity_feature': True}

@@ -203,7 +203,7 @@ class Gaussian(fltr.IFilter):
             .format(self=self)
 
 
-class Medisyan(fltr.IFilter):
+class Median(fltr.IFilter):
     """Represents a median filter."""
 
     def __init__(self,

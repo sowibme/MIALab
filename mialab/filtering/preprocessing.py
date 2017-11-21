@@ -177,7 +177,33 @@ class NormalizeZScore(fltr.IFilter):
             .format(self=self)
 
 
-class Median(fltr.IFilter):
+class Gaussian(fltr.IFilter):
+    """Represents a gaussian filter."""
+
+    def __init__(self,
+                 sigma: int=1):
+        """Initializes a new instance of the Gaussian class."""
+        super().__init__()
+        self.sigma = sigma
+
+    def execute(self, image: sitk.Image, params: fltr.IFilterParams=None) -> sitk.Image:
+
+        gaussian = sitk.SmoothingRecursiveGaussianImageFilter()
+        gaussian.SetSigma(self.sigma)
+
+        return gaussian.Execute(image)
+
+    def __str__(self):
+        """Gets a printable string representation.
+
+        Returns:
+            str: String representation.
+        """
+        return 'Gaussian:\n' \
+            .format(self=self)
+
+
+class Medisyan(fltr.IFilter):
     """Represents a median filter."""
 
     def __init__(self,

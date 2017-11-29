@@ -47,8 +47,8 @@ class BrainImageFilePathGenerator(load.FilePathGenerator):
             # file_name = 'labels_native'
             file_name = 'labels_mniatlas'
         elif file_key == structure.BrainImageTypes.BrainMask:
-            # file_name = 'Brainmasknative'
-            file_name = 'Brainmaskmni'
+            file_name = 'Brainmasknative'
+            # file_name = 'Brainmaskmni'
         else:
             raise ValueError('Unknown key')
 

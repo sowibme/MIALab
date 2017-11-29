@@ -6,7 +6,7 @@
 #SBATCH --mail-type=begin,end,fail
 # Mandatory resources (h_cpu=hh:mm:ss)
 #SBATCH --time=02:59:00
-#SBATCH --cpus-per-task=20
+#SBATCH --cpus-per-task=16
 #SBATCH --mem-per-cpu=2G
 #SBATCH --job-name="MIALab_Job"
 

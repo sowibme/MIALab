@@ -25,8 +25,8 @@ import mialab.utilities.pipeline_utilities as putil
 
 FLAGS = None  # the program flags
 IMAGE_KEYS = [structure.BrainImageTypes.T1, structure.BrainImageTypes.T2, structure.BrainImageTypes.GroundTruth]  # the list of images we will load
-TRAIN_BATCH_SIZE = 70  # 1..70, the higher the faster but more memory usage
-TEST_BATCH_SIZE = 30  # 1..30, the higher the faster but more memory usage
+TRAIN_BATCH_SIZE = 8  # 1..70, the higher the faster but more memory usage
+TEST_BATCH_SIZE = 2  # 1..30, the higher the faster but more memory usage
 
 
 def main(_):
@@ -61,7 +61,7 @@ def main(_):
                                          futil.BrainImageFilePathGenerator(),
                                          futil.DataDirectoryFilter())
     data_items = list(crawler.data.items())
-    pre_process_params = {'median_pre': True,
+    pre_process_params = {'median_pre': False,
                           'zscore_pre': False,
                           'coordinates_feature': True,
                           'intensity_feature': True,

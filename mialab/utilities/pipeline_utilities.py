@@ -187,7 +187,7 @@ def pre_process(id_: str, paths: dict, **kwargs) -> structure.BrainImage:
     # construct T1 pipeline
     pipeline_t1 = fltr.FilterPipeline()
     if kwargs.get('gaussian_pre', False):
-        pipeline_t1.add_filter(fltr_prep.Gaussian(sigma=1))
+        pipeline_t1.add_filter(fltr_prep.Gaussian(sigma=3))
     if kwargs.get('median_pre', False):
         pipeline_t1.add_filter(fltr_prep.Median(radius=1))
     if kwargs.get('zscore_pre', False):

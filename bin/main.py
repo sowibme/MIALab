@@ -63,6 +63,7 @@ def main(_):
     data_items = list(crawler.data.items())
     pre_process_params = {'median_pre': False,
                           'zscore_pre': False,
+                          'gaussian_pre': False,
                           'coordinates_feature': True,
                           'intensity_feature': True,
                           'gradient_intensity_feature': True}

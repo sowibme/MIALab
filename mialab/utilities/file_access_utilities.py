@@ -36,13 +36,13 @@ class BrainImageFilePathGenerator(load.FilePathGenerator):
         if file_key == structure.BrainImageTypes.T1:
             # file_name = 'T1native'
             # file_name = 'T1mni'
-            file_name = 'T1mni_biasfieldcorr'
-            # file_name = 'T1mni_biasfieldcorr_noskull'
+            # file_name = 'T1mni_biasfieldcorr'
+            file_name = 'T1mni_biasfieldcorr_noskull'
         elif file_key == structure.BrainImageTypes.T2:
             # file_name = 'T2native'
             # file_name = 'T2mni'
-            file_name = 'T2mni_biasfieldcorr'
-            # file_name = 'T2mni_biasfieldcorr_noskull'
+            # file_name = 'T2mni_biasfieldcorr'
+            file_name = 'T2mni_biasfieldcorr_noskull'
         elif file_key == structure.BrainImageTypes.GroundTruth:
             # file_name = 'labels_native'
             file_name = 'labels_mniatlas'

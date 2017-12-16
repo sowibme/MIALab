@@ -64,6 +64,7 @@ def main(_):
     pre_process_params = {'median_pre': False,
                           'zscore_pre': False,
                           'gaussian_pre': False,
+                          'bilateral_pre': True,
                           'coordinates_feature': True,
                           'intensity_feature': True,
                           'gradient_intensity_feature': True}

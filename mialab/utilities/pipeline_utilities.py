@@ -190,6 +190,8 @@ def pre_process(id_: str, paths: dict, **kwargs) -> structure.BrainImage:
         pipeline_t1.add_filter(fltr_prep.Gaussian(sigma=3))
     if kwargs.get('median_pre', False):
         pipeline_t1.add_filter(fltr_prep.Median(radius=1))
+    if kwargs.get('bilateral_pre', False):
+        pipeline_t1.add_filter(fltr_prep.Bilateral(domainSigma=4.0, rangeSigma=50.0))
     if kwargs.get('zscore_pre', False):
         pipeline_t1.add_filter(fltr_prep.NormalizeZScore())
     if kwargs.get('registration_pre', False):

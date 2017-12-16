@@ -3,6 +3,9 @@ import SimpleITK as sitk
 import numpy as np
 
 import mialab.filtering.filter as fltr
+import pickle
+from medpy.filter import IntensityRangeStandardization
+
 
 
 class BiasFieldCorrectorParams(fltr.IFilterParams):
@@ -322,4 +325,67 @@ class HistogramMatcher(fltr.IFilter):
                ' histogram_levels:         {self.histogram_levels}\n' \
                ' match_points:             {self.match_points}\n' \
                ' threshold_mean_intensity: {self.threshold_mean_intensity}\n' \
+            .format(self=self)
+
+
+class IRS(fltr.IFilter):
+    """Represents a intensity range standardization filter implemented with Medpy."""
+
+    def __init__(self, model_path='bin/mia-model/hmmModel.pkl', train=False):
+        """Initializes a new instance of the HistMatcher class."""
+        super().__init__()
+        self.model_path = model_path
+        self.train = train
+
+        if self.train:
+            self.train_images = []
+            self.irs = IntensityRangeStandardization()
+        else:
+            with open(model_path, 'r') as f:
+                self.irs = pickle.load(f)
+
+    def execute(self, image: sitk.Image, params: fltr.IFilterParams=None) -> sitk.Image:
+        img_array = sitk.GetArrayFromImage(image)
+        if self.train:
+            self.train_images.append(img_array)
+            self.irs.train(self.train_images)
+            with open(self.model_path, 'wb') as f:
+                pickle.dump(self.irs, f)
+            return image
+        else:
+            return sitk.Image(self.irs.transform(img_array), sitk.sitkUInt8)
+
+    def __str__(self):
+        """Gets a printable string representation.
+
+        Returns:
+            str: String representation.
+        """
+        return 'IRS:\n' \
+               ' model_path:         {self.model_path}\n' \
+               ' train:             {self.train}\n' \
+            .format(self=self)
+
+
+class Bilateral(fltr.IFilter):
+    """Represents a bilateral filter."""
+
+    def __init__(self, domainSigma=4.0, rangeSigma=50.0):
+        """Initializes a new instance of the bilateral class."""
+        super().__init__()
+        self.domainSigma = domainSigma
+        self.rangeSigma = rangeSigma
+
+    def execute(self, image: sitk.Image, params: fltr.IFilterParams=None) -> sitk.Image:
+        return sitk.Bilateral(image, domainSigma=self.domainSigma, rangeSigma=self.rangeSigma)
+
+    def __str__(self):
+        """Gets a printable string representation.
+
+        Returns:
+            str: String representation.
+        """
+        return 'Bilateral:\n' \
+               ' domainSigma:         {self.domainSigma}\n' \
+               ' rangeSigma:             {self.rangeSigma}\n' \
             .format(self=self)

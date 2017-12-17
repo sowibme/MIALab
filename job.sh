@@ -5,7 +5,7 @@
 # Mail on (b)egin, (e)nd, (a)bort or (n)one
 #SBATCH --mail-type=begin,end,fail
 # Mandatory resources (h_cpu=hh:mm:ss)
-#SBATCH --time=02:59:00
+#SBATCH --time=03:59:00
 #SBATCH --cpus-per-task=16
 #SBATCH --mem-per-cpu=2G
 #SBATCH --job-name="MIALab_Job"
